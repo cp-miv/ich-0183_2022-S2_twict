@@ -9,8 +9,14 @@ class User extends \Core\Model
         $db = static::getDB();
 
         $models = $db
-                    ->query('SELECT * FROM users WHERE deletedAt IS NULL;')
-                    ->fetchAll();
+            ->query(<<< SQL
+                SELECT `idUser`, `firstname`, `lastname`, `mailAddress`, `password`, `createdAt`, `updatedAt`, `deletedAt`
+                FROM `users`
+                WHERE `deletedAt` IS NULL;
+                SQL)
+            ->fetchAll();
+
+        return $models;
 
         return $models;
     }
@@ -21,26 +27,27 @@ class User extends \Core\Model
 
         $model = $db
             ->query(<<< SQL
-                    SELECT `idUser`, `firstname`, `lastname`, `mailAddress`, `password`, `createdAt`, `updatedAt`, `deletedAt` FROM `Users`
-                    WHERE `idUser` = {$id}
-                    LIMIT 1;
+                SELECT `idUser`, `firstname`, `lastname`, `mailAddress`, `password`, `createdAt`, `updatedAt`, `deletedAt`
+                FROM `users`
+                WHERE `idUser` = {$id}
+                LIMIT 1;
                 SQL)
             ->fetch();
 
         return $model;
     }
 
-    public static function add($model) : bool
+    public static function add($model): bool
     {
         $db = static::getDB();
         $success = $db
-                    ->prepare(<<< SQL
-                        INSERT INTO `Users`
-                            (`firstname`, `lastname`, `mailAddress`, `password`)
-                        VALUES
-                            ('{$model['firstname']}', '{$model['lastname']}', '{$model['mailAddress']}', '{$model['password']}');
-                        SQL)
-                    ->execute();
+            ->prepare(<<< SQL
+                INSERT INTO `users`
+                    (`firstname`, `lastname`, `mailAddress`, `password`)
+                VALUES
+                    ('{$model['firstname']}', '{$model['lastname']}', '{$model['mailAddress']}', '{$model['password']}');
+                SQL)
+            ->execute();
 
         return $success;
     }
@@ -51,7 +58,7 @@ class User extends \Core\Model
 
         $success = $db
             ->prepare(<<< SQL
-                UPDATE `Users` SET
+                UPDATE `users` SET
                     `firstname` = '{$model['firstname']}',
                     `lastname` = '{$model['lastname']}',
                     `mailAddress` = '{$model['mailAddress']}',

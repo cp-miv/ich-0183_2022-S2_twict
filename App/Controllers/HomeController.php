@@ -11,7 +11,7 @@ class HomeController extends \Core\Controller
     public function indexAction()
     {
         $this->view['hello'] = 'Bienvenue sur la page d\'accueil';
-        
+
         $this->view['debug']['session'] = $_SESSION;
         $this->view += NotificationHelper::flush();
 

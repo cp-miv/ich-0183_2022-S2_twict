@@ -23,8 +23,7 @@ class UserController extends \Core\Controller
 
     public function addAction()
     {
-        switch ($_SERVER['REQUEST_METHOD'])
-        {
+        switch ($_SERVER['REQUEST_METHOD']) {
             case 'GET':
                 // Affichage du formulaire
                 View::renderTemplate(
@@ -48,8 +47,7 @@ class UserController extends \Core\Controller
 
     public function editAction()
     {
-        switch ($_SERVER['REQUEST_METHOD'])
-        {
+        switch ($_SERVER['REQUEST_METHOD']) {
             case 'GET':
                 $idUser = $_GET['idUser'];
                 $this->view['user'] = User::find($idUser);

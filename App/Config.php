@@ -13,6 +13,6 @@ class Config
     const DB_CHARSET = 'utf8';
     const DB_USER = 'root';
     const DB_PASS = '123456';
-	
+
     const SHOW_ERRORS = true;
 }

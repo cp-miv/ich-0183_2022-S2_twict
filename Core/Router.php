@@ -116,7 +116,6 @@ class Router
 
                 if (preg_match('/action$/i', $action) == 0) {
                     $controller_object->$action();
-
                 } else {
                     throw new \Exception("Method $action in controller $controller cannot be called directly - remove the Action suffix to call this method");
                 }
@@ -179,17 +178,8 @@ class Router
      */
     protected function removeQueryStringVariables($url)
     {
+        $url = parse_url($url, PHP_URL_PATH);
         $url = trim($url, '/');
-
-        if ($url != '') {
-            $parts = explode('&', $url, 2);
-
-            if (strpos($parts[0], '=') === false) {
-                $url = $parts[0];
-            } else {
-                $url = '';
-            }
-        }
 
         return $url;
     }

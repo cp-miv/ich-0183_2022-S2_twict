@@ -20,7 +20,7 @@ class NotificationHelper
         unset($_SESSION[self::BACKEND_KEY][$key]);
     }
 
-    public static function get() : array
+    public static function get(): array
     {
         self::ensureBackendCreated();
 

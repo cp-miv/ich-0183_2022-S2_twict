@@ -24,8 +24,7 @@ class View
 
         if (is_readable($file)) {
             require $file;
-        }
-        else {
+        } else {
             throw new \Exception("$file not found");
         }
     }
