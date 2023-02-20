@@ -3,16 +3,19 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 15 fév. 2023 à 09:48
+-- Généré le : lun. 20 fév. 2023 à 09:40
 -- Version du serveur : 8.0.32
 -- Version de PHP : 8.1.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 --
 -- Base de données : `twict`
 --
+CREATE DATABASE IF NOT EXISTS `twict` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+USE `twict`;
 
 -- --------------------------------------------------------
 
@@ -90,16 +93,17 @@ CREATE TABLE IF NOT EXISTS `users` (
   `deletedAt` datetime DEFAULT NULL,
   PRIMARY KEY (`idUser`),
   UNIQUE KEY `idUser_UNIQUE` (`idUser`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `users`
 --
 
 INSERT INTO `users` (`idUser`, `firstname`, `lastname`, `mailAddress`, `password`, `createdAt`, `updatedAt`, `deletedAt`) VALUES
-(16, 'Albert', 'Adam', 'albert.adam@twict.dev', NULL, '2023-02-15 00:00:00', NULL, NULL),
-(20, 'Béatrice', 'Blanc', 'beatrice.blanc@twict.dev', NULL, '2023-02-15 00:00:00', NULL, NULL),
-(21, 'Clément', 'Chevalier', 'clement.chevalier@twict.dev', NULL, '2023-02-15 00:00:00', NULL, NULL);
+(16, 'Albert', 'Adam', 'albert.adam@twict.dev', '123456', '2023-02-15 00:00:00', '2023-02-15 11:50:22', NULL),
+(20, 'Béatrice', 'Blanc', 'beatrice.blanc@twict.dev', '', '2023-02-15 00:00:00', '2023-02-15 11:04:14', NULL),
+(21, 'Clément', 'Chevalier', 'clement.chevalier@twict.dev', NULL, '2023-02-15 00:00:00', '2023-02-15 00:00:00', NULL),
+(22, 'Michael', 'Vogel', 'michael.vogel@twict.dev', '', '2023-02-15 11:01:02', NULL, '2023-02-15 11:25:47');
 
 --
 -- Contraintes pour les tables déchargées
@@ -124,3 +128,4 @@ ALTER TABLE `financialtransaction`
 ALTER TABLE `transactionmessage`
   ADD CONSTRAINT `fk_TransactionMessage_FinancialTransaction1` FOREIGN KEY (`idTransaction`) REFERENCES `financialtransaction` (`idFinancialTransaction`),
   ADD CONSTRAINT `fk_TransactionMessage_Users1` FOREIGN KEY (`idAuthor`) REFERENCES `users` (`idUser`);
+COMMIT;
