@@ -41,7 +41,6 @@ class UserController extends \Core\Controller
 
                 header('Location: /User/index');
                 exit;
-                break;
         }
     }
 
@@ -67,7 +66,6 @@ class UserController extends \Core\Controller
 
                 header('Location: /User/index');
                 exit;
-                break;
         }
     }
 }
